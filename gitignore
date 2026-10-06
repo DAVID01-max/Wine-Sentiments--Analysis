@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.venv/
+winemag-data-130k-v2.csv
