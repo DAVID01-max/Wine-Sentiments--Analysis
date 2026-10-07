@@ -6,6 +6,9 @@ import joblib
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+_here = os.path.dirname(os.path.abspath(__file__))
+_art = os.path.join(_here, "artifacts")
+_model_path = os.path.join(_art, "best_model.joblib")
 
 import subprocess
 import sys
