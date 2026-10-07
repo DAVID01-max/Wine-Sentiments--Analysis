@@ -7,9 +7,15 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-_here = os.path.dirname(os.path.abspath(__file__))
-_art = os.path.join(_here, "artifacts")
-model = joblib.load(os.path.join(_art, "best_model.joblib"))
+import subprocess
+import sys
+
+_model_path = os.path.join(_art, "best_model.joblib")
+if not os.path.exists(_model_path):
+    # No saved model (e.g. fresh Render deploy): train it now
+    subprocess.run([sys.executable, os.path.join(_here, "train_model.py")], check=True)
+
+model = joblib.load(_model_path)
 
 try:
     with open(os.path.join(_art, "model_card.json")) as f:
