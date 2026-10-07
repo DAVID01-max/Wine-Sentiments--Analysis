@@ -5,7 +5,7 @@ services:
     plan: free
     # Trains only if artifacts/best_model.joblib is not already committed.
     buildCommand: pip install -r requirements.txt && python train_model.py --if-missing
-    startCommand: gunicorn deploy:app --bind 0.0.0.0:$PORT --workers 2 --timeout 60
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 60
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
